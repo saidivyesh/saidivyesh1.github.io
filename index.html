@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      background-image: url('pi.jpg');
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: xx-large;
+    }
+    td {
+      padding: 5px;
+      text-align: center;
+      font-family: 'Courier New', Courier, monospace;
+      border-radius: 10%;
+    }
+    div {
+      border: black;
+      border-style: double;
+      border-width: thick;
+      padding: 20px;
+    }
+    input[type="text"] {
+      width: 100%;
+      font-size: 24px;
+      padding: 10px;
+      text-align: right;
+    }
+    input[type="button"] {
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <table>
+      <caption><strong>Calculator</strong></caption>
+      <tr>
+        <td colspan="4">
+          <input type="text" id="txt_value" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="button" value="7" onclick="getbtnclick('7')"></td>
+        <td><input type="button" value="8" onclick="getbtnclick('8')"></td>
+        <td><input type="button" value="9" onclick="getbtnclick('9')"></td>
+        <td><input type="button" value="/" onclick="getbtnclick('/')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="4" onclick="getbtnclick('4')"></td>
+        <td><input type="button" value="5" onclick="getbtnclick('5')"></td>
+        <td><input type="button" value="6" onclick="getbtnclick('6')"></td>
+        <td><input type="button" value="*" onclick="getbtnclick('*')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="1" onclick="getbtnclick('1')"></td>
+        <td><input type="button" value="2" onclick="getbtnclick('2')"></td>
+        <td><input type="button" value="3" onclick="getbtnclick('3')"></td>
+        <td><input type="button" value="-" onclick="getbtnclick('-')"></td>
+      </tr>
+      <tr>
+        <td><input type="button" value="0" onclick="getbtnclick('0')"></td>
+        <td><input type="button" value="C" onclick="getbtnclick('C')"></td>
+        <td><input type="button" value="=" onclick="getbtnclick('=')"></td>
+        <td><input type="button" value="+" onclick="getbtnclick('+')"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    let f1 = 0;
+    let f2 = 0;
+    let op = '';
+
+    function getbtnclick(val) {
+      const display = document.getElementById('txt_value');
+
+      if (val === 'C') {
+        display.value = '';
+        f1 = 0;
+        f2 = 0;
+        op = '';
+      } else if (val === '+' || val === '-' || val === '*' || val === '/') {
+        f1 = parseFloat(display.value);
+        display.value = '';
+        op = val;
+      } else if (val === '=') {
+        f2 = parseFloat(display.value);
+        let result = 0;
+        switch (op) {
+          case '+': result = f1 + f2; break;
+          case '-': result = f1 - f2; break;
+          case '*': result = f1 * f2; break;
+          case '/': result = f2 !== 0 ? f1 / f2 : 'Error'; break;
+        }
+        display.value = result;
+      } else {
+        display.value += val;
+      }
+    }
+  </script>
+</body>
+</html>
